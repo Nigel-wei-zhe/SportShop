@@ -281,10 +281,12 @@ export default {
         console.log(response.data);
         if (response.data.success) {
           $('#productModal').modal('hide');
+          this.$bus.$emit('message:push', response.data.message, 'primary');
           vm.getProducts();
         } else {
           $('#productModal').modal('hide');
           vm.getProducts();
+          this.$bus.$emit('message:push', response.data.message, 'danger');
           console.log('新增失敗');
         }
       });
@@ -301,10 +303,12 @@ export default {
         console.log(response.data);
         if (response.data.success) {
           $('#delProductModal').modal('hide');
+          this.$bus.$emit('message:push', response.data.message);
           vm.getProducts();
         } else {
           $('#delProductModal').modal('hide');
           vm.getProducts();
+          this.$bus.$emit('message:push', response.data.message, 'danger');
           console.log('刪除失敗');
         }
       });

@@ -226,10 +226,12 @@ export default {
         console.log(response.data);
         if (response.data.success) {
           $('#couponModal').modal('hide');
+          this.$bus.$emit('message:push', response.data.message, 'primary');
           vm.getCoupons();
         } else {
           $('#couponModal').modal('hide');
           vm.getCoupons();
+          this.$bus.$emit('message:push', response.data.message, 'danger');
           console.log('新增失敗');
         }
       });
@@ -241,10 +243,12 @@ export default {
         console.log(response.data);
         if (response.data.success) {
           $('#delCouponModal').modal('hide');
+          this.$bus.$emit('message:push', response.data.message);
           vm.getCoupons();
         } else {
           $('#delCouponModal').modal('hide');
           vm.getCoupons();
+          this.$bus.$emit('message:push', response.data.message, 'danger');
           console.log('刪除失敗');
         }
       });

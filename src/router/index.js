@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import index from '../views/index.vue';
 
 Vue.use(VueRouter);
 
@@ -8,7 +8,14 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home,
+    component: index,
+    children: [
+      {
+        path: '/',
+        name: 'CustomerOrder',
+        component: () => import('../views/index_layout/CustomerOrder.vue'),
+      },
+    ],
   },
   {
     path: '/signin',

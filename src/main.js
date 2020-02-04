@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import Vuex from 'vuex';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import Loading from 'vue-loading-overlay';
@@ -8,9 +9,12 @@ import App from './App.vue';
 import router from './router';
 import currencyFilter from './filters/currency';
 import timestampToFormatTimeFilter from './filters/timestampToFormatTime';
+import './bus';
+import store from './store';
 
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
+Vue.use(Vuex);
 axios.defaults.withCredentials = true; // 跨域驗證
 Vue.component('Loading', Loading);
 Vue.filter('currency', currencyFilter);
@@ -18,6 +22,7 @@ Vue.filter('timestampToFormatTime', timestampToFormatTimeFilter);
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app');
 

@@ -5,6 +5,7 @@
 </template>
 
 <style lang="scss">
+@import "./assets/cssreset.scss";
 @import "~bootstrap/scss/bootstrap";
 @import "./assets/_dashboard.scss";
 #app {

@@ -6,7 +6,7 @@
       <div class="row">
           <Sidebar />
           <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <router-view></router-view>
+            <router-view />
           </main>
       </div>
     </div>
@@ -15,7 +15,7 @@
 <script>
 import Sidebar from '../components/dashboard_components/Sidebar.vue';
 import Navbar from '../components/dashboard_components/Navbar.vue';
-import Alert from '../components/AlertMessage.vue';
+import Alert from '../components/bus_components/AlertMessage.vue';
 
 export default {
   components: {
