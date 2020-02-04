@@ -1,9 +1,9 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand px-1" href="#">
-         SHOP
+      <div class="container-fluid">
+        <a class="navbar-brand px-1 " href="#">
+         S-SHOP
         </a>
         <button
           class="navbar-toggler"
@@ -19,10 +19,9 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" href="#">
+              <router-link class="nav-link" href="#" to="/">
                 首頁
-                <span class="sr-only">(current)</span>
-              </a>
+              </router-link>
             </li>
             <li class="nav-item dropdown">
               <a
@@ -35,19 +34,19 @@
                 aria-expanded="false"
               >商品列表</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <router-link class="dropdown-item" href="#" to="CustomerOrder">全部商品</router-link>
               </div>
             </li>
           </ul>
           <form class="form-inline ml-auto">
+            <router-link to="Signin"
+              href="#"
+              class="btn btn-outline-light mr-1"
+            ><i class="fas fa-users"></i></router-link>
             <router-link to="/admin"
               href="#"
               class="btn btn-outline-light mr-1"
-              data-toggle="modal"
-              data-target="#signin"
-            >登入</router-link>
+            ><i class="fas fa-shopping-cart"></i></router-link>
           </form>
         </div>
       </div>

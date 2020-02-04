@@ -12,6 +12,11 @@ const routes = [
     children: [
       {
         path: '/',
+        name: 'Home',
+        component: () => import('../views/index_layout/Home.vue'),
+      },
+      {
+        path: '/customerOrder',
         name: 'CustomerOrder',
         component: () => import('../views/index_layout/CustomerOrder.vue'),
       },
