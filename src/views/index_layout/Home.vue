@@ -1,7 +1,15 @@
 <template>
   <div>
-    <header class="mb-0">
-      <div class="imgg mb-0"></div>
+    <header>
+      <div class="jumbotron jumbotron-fluid jumbotron-bg mb-0">
+        <div class="container text-light">
+          <h1 class="display-4">找球?</h1>
+          <p
+            class="lead"
+          >Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+          Aenean commodo ligula eget dolor. Aenean massa.</p>
+        </div>
+      </div>
       <marquee class="bg-dark text-light mb-0 carousel-text">輸入指定優惠碼，立即享優惠</marquee>
     </header>
     <section>
@@ -15,24 +23,30 @@
               <i class="fas fa-user-friends fa-5x"></i>
             </div>
             <h3>交朋友</h3>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                Aenean commodo ligula eget dolor. Aenean massa.</p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+              Aenean commodo ligula eget dolor. Aenean massa.
+            </p>
           </div>
           <div class="col-md-4">
             <div class="mb-2">
               <i class="fas fa-fist-raised fa-5x"></i>
             </div>
             <h3>身體健康</h3>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                Aenean commodo ligula eget dolor. Aenean massa.</p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+              Aenean commodo ligula eget dolor. Aenean massa.
+            </p>
           </div>
           <div class="col-md-4">
             <div class="mb-2">
               <i class="fas fa-smile-wink fa-5x"></i>
             </div>
             <h3>心情愉悅</h3>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                Aenean commodo ligula eget dolor. Aenean massa.</p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+              Aenean commodo ligula eget dolor. Aenean massa.
+            </p>
           </div>
         </div>
       </div>
@@ -94,11 +108,11 @@
 </template>
 
 <style lang="scss">
-.imgg {
+.jumbotron-bg {
   background-image: url("https://images.unsplash.com/photo-1542652694-40abf526446e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80");
   background-position: 50% 20%;
   background-size: cover;
-  height: 500px;
+  min-height: 400px;
 }
 .header-carousel-item {
   height: 600px;

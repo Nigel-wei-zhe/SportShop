@@ -1,42 +1,49 @@
 <template>
-  <div>
-    <loading :active.sync="isLoading"></loading>
-    <div class="row mt-4">
-      <div class="col-md-4 mb-4" v-for="item in products" :key="item.id">
-        <div class="card border-0 shadow-sm">
-          <div
-            style="height: 300px; background-size: cover; background-position: center"
-            :style="{backgroundImage: `url(${item.imageUrl})`}"
-          ></div>
-          <div class="card-body">
-            <span class="badge badge-secondary float-right ml-2">{{ item.category }}</span>
-            <h5 class="card-title">
-              <a href="#" class="text-dark">{{ item.title }}</a>
-            </h5>
-            <p class="card-text">{{ item.content }}</p>
-            <div class="d-flex justify-content-between align-items-baseline">
-              <div class="h5" v-if="!item.price">{{ item.origin_price }} 元</div>
-              <del class="h6" v-if="item.price">原價 {{ item.origin_price }} 元</del>
-              <div class="h5" v-if="item.price">現在只要 {{ item.price }} 元</div>
+  <div class="container mt-2">
+    <div class="row">
+      <div class="col-md-2">
+        <leftList/>
+      </div>
+      <div class="col-md-10">
+        <loading :active.sync="isLoading"></loading>
+        <div class="row">
+          <div class="col-md-4 mb-4" v-for="item in products" :key="item.id">
+            <div class="card border-0 card-shadow">
+              <div
+                style="height: 300px; background-size: cover; background-position: center"
+                :style="{backgroundImage: `url(${item.imageUrl})`}"
+              ></div>
+              <div class="card-body">
+                <span class="badge badge-secondary float-right ml-2">{{ item.category }}</span>
+                <h5 class="card-title">
+                  <a href="#" class="text-dark">{{ item.title }}</a>
+                </h5>
+                <p class="card-text">{{ item.content }}</p>
+                <div class="d-flex justify-content-between align-items-baseline">
+                  <div class="h5" v-if="!item.price">{{ item.origin_price }} 元</div>
+                  <del class="h6" v-if="item.price">原價 {{ item.origin_price }} 元</del>
+                  <div class="h5" v-if="item.price">現在只要 {{ item.price }} 元</div>
+                </div>
+              </div>
+              <div class="card-footer border-top-0 bg-white d-flex">
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary btn-sm"
+                  @click="getProduct(item.id)"
+                >
+                  <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
+                  查看更多
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-danger btn-sm ml-auto"
+                  @click="addtoCart(item.id)"
+                >
+                  <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
+                  加到購物車
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="card-footer d-flex">
-            <button
-              type="button"
-              class="btn btn-outline-secondary btn-sm"
-              @click="getProduct(item.id)"
-            >
-              <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
-              查看更多
-            </button>
-            <button
-              type="button"
-              class="btn btn-outline-danger btn-sm ml-auto"
-              @click="addtoCart(item.id)"
-            >
-              <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
-              加到購物車
-            </button>
           </div>
         </div>
       </div>
@@ -133,10 +140,9 @@
           </tfoot>
         </table>
         <div class="input-group mb-3 input-group-sm">
-          <input
-            type="text"
+          <input type="text"
             class="form-control"
-            v-model="coupon_code" placeholder="請輸入優惠碼" />
+            v-model="coupon_code" placeholder="請輸入優惠碼"/>
           <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" @click="addCouponCode()">
               套用優惠碼
@@ -229,8 +235,12 @@
 </template>
 <script>
 import $ from 'jquery';
+import leftList from '../../components/index_components/leftlist.vue';
 
 export default {
+  components: {
+    leftList,
+  },
   data() {
     return {
       products: [],
@@ -347,3 +357,13 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.card-shadow {
+  box-shadow: 0 3px 5px rgba($color: #000000, $alpha: 0.5);
+  transition: all 0.2s;
+}
+.card-shadow:hover {
+  box-shadow: 7px 7px 10px rgba($color: #000000, $alpha: 0.7);
+}
+</style>
