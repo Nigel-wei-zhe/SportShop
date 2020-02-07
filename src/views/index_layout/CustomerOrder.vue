@@ -243,7 +243,7 @@ export default {
   },
   data() {
     return {
-      products: [],
+      // products: [],
       product: {},
       cart: {},
       status: {
@@ -258,19 +258,26 @@ export default {
         },
         message: '',
       },
-      isLoading: false,
       coupon_code: '',
     };
+  },
+  computed: {
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
+    products() {
+      return this.$store.state.products;
+    },
   },
   methods: {
     getProducts() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=:page`;
-      vm.isLoading = true;
+      vm.$store.dispatch('updateLoading', true);
       this.$http.get(url).then((response) => {
         vm.products = response.data.products;
         console.log(response);
-        vm.isLoading = false;
+        vm.$store.dispatch('updateLoading', false);
       });
     },
     getProduct(id) {
@@ -302,20 +309,20 @@ export default {
     getCart() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.isLoading = true;
+      vm.$store.dispatch('updateLoading', true);
       this.$http.get(url).then((response) => {
         vm.cart = response.data.data;
         console.log(response);
-        vm.isLoading = false;
+        vm.$store.dispatch('updateLoading', false);
       });
     },
     removeCartItem(id) {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-      vm.isLoading = true;
+      vm.$store.dispatch('updateLoading', true);
       this.$http.delete(url).then(() => {
         vm.getCart();
-        vm.isLoading = false;
+        vm.$store.dispatch('updateLoading', false);
       });
     },
     addCouponCode() {
@@ -324,11 +331,11 @@ export default {
       const coupon = {
         code: vm.coupon_code,
       };
-      vm.isLoading = true;
+      vm.$store.dispatch('updateLoading', true);
       this.$http.post(url, { data: coupon }).then((response) => {
         console.log(response);
         vm.getCart();
-        vm.isLoading = false;
+        vm.$store.dispatch('updateLoading', false);
       });
     },
     createOrder() {
@@ -336,9 +343,9 @@ export default {
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`;
       const order = vm.form;
       const isValid = this.$refs.observer.validate();
-      vm.isLoading = true;
+      vm.$store.dispatch('updateLoading', true);
       if (!isValid) {
-        vm.isLoading = false;
+        vm.$store.dispatch('updateLoading', false);
         console.log('欄位錯誤');
       } else {
         this.$http.post(url, { data: order }).then((response) => {
@@ -346,7 +353,7 @@ export default {
           if (response.data.success) {
             vm.$router.push(`Customer_Checkout/${response.data.orderId}`);
           }
-          vm.isLoading = false;
+          vm.$store.dispatch('updateLoading', false);
         });
       }
     },

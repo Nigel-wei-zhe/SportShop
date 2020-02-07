@@ -1,14 +1,11 @@
 <template>
   <div class="sticky-top">
     <div class="list-group">
-      <a href="#" class="list-group-item list-group-item-action active">
-        <i class="fas fa-basketball-ball mr-1"></i>所有商品
-      </a>
-      <a href="#" class="list-group-item list-group-item-action">
-        <i class="fas fa-basketball-ball mr-1"></i>熱賣商品
-      </a>
-      <a href="#" class="list-group-item list-group-item-action">
-        <i class="fas fa-basketball-ball mr-1"></i>主打商品
+      <a href="#" class="list-group-item list-group-item-action"
+        v-for="(item, index) in categories"
+        :key=index
+      >
+        <i class="fas fa-basketball-ball mr-1"></i>{{ item }}
       </a>
       <a
         href="#"
@@ -19,3 +16,15 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  created() {
+    this.$store.dispatch('getProducts');
+  },
+  computed: {
+    categories() {
+      return this.$store.state.categories;
+    },
+  },
+};
+</script>
