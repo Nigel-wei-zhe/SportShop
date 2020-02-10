@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <a class="navbar-brand px-1" href="#">BALL</a>
         <button
-          class="navbar-toggler"
+          class="navbar-toggler ml-auto"
           type="button"
           data-toggle="collapse"
           data-target="#navbarNavDropdown"
@@ -34,8 +34,9 @@
               </div>
             </li>
           </ul>
-          <form class="form-inline ml-auto">
-            <div class="dropdown">
+          <router-link to="Signin" href="#" class="btn ml-2 btn-cart text-light">登入</router-link>
+        </div>
+        <div class="ml-auto dropdown">
               <button
                 class="btn btn-sm btn-cart"
                 data-toggle="dropdown"
@@ -72,9 +73,6 @@
                 <shoppingCart/>
               </div>
             </div>
-            <router-link to="Signin" href="#" class="btn ml-2 btn-cart text-light">登入</router-link>
-          </form>
-        </div>
       </div>
     </nav>
   </div>

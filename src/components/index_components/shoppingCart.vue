@@ -37,10 +37,10 @@
         </tr>
       </tfoot>
     </table>
-    <div class="input-group mx-3 mb-2 input-group-sm">
-      <input type="text" class="form-control w-25" v-model="couponCode" placeholder="請輸入優惠碼" />
+    <div class="input-group mx-3 mb-2 w-75 input-group-sm">
+      <input type="text" class="form-control" v-model="couponCode" placeholder="請輸入優惠碼" />
       <div class="input-group-append">
-        <button class="btn btn-secondary"
+        <button class="btn btn-dark"
           type="button"
           @click="addCouponCode()"
         >套用優惠碼</button>
