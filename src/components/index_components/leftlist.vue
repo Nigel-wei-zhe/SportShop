@@ -28,3 +28,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.sticky-top {
+  z-index: -1;
+}
+</style>

@@ -43,7 +43,8 @@
                 aria-expanded="false"
               >
                 <i class="fas fa-shopping-cart text-light fa-2x"></i>
-                <span class="badge badge-pill badge-danger">{{ cartQty }}</span>
+                <span class="badge badge-pill badge-danger"
+                v-if="cartQty.carts && cartQty.carts.length > 0">{{ cartQty.carts.length }}</span>
               </button>
               <div
                 class="dropdown-menu dropdown-menu-right bg-secondary text-center"
@@ -88,8 +89,7 @@ export default {
   },
   computed: {
     cartQty() {
-      const Qty = this.$store.state.cart.carts.length;
-      return Qty;
+      return this.$store.state.cart;
     },
   },
 };

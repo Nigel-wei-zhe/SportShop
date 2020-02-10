@@ -71,6 +71,17 @@ export default new Vuex.Store({
         context.dispatch('getCart');
       });
     },
+    addCouponCode(context, couponCode) {
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
+      const coupon = {
+        code: couponCode,
+      };
+      context.commit('LOADING', true);
+      axios.post(url, { data: coupon }).then(() => {
+        context.dispatch('getCart');
+        context.commit('LOADING', false);
+      });
+    },
   },
   modules: {
   },
