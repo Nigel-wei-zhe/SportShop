@@ -43,7 +43,7 @@
                 aria-expanded="false"
               >
                 <i class="fas fa-shopping-cart text-light fa-2x"></i>
-                <span class="badge badge-pill badge-danger">2</span>
+                <span class="badge badge-pill badge-danger">{{ cartQty }}</span>
               </button>
               <div
                 class="dropdown-menu dropdown-menu-right bg-secondary text-center"
@@ -51,7 +51,7 @@
                 style="min-width: 300px"
               >
                 <h4 class="text-light font-weight-bold">購物車清單</h4>
-                <table class="table table-secondary table-sm">
+                <!-- <table class="table table-secondary table-sm">
                   <tbody>
                     <tr>
                       <td>籃球</td>
@@ -67,7 +67,8 @@
                 </table>
                 <a href="shoppingCart-checkout.html" class="btn btn-secondary font-weight-bold">
                   <i class aria-hidden="true"></i> 結帳去
-                </a>
+                </a> -->
+                <shoppingCart/>
               </div>
             </div>
             <router-link to="Signin" href="#" class="btn ml-2 btn-cart text-light">登入</router-link>
@@ -77,6 +78,22 @@
     </nav>
   </div>
 </template>
+
+<script>
+import shoppingCart from './shoppingCart.vue';
+
+export default {
+  components: {
+    shoppingCart,
+  },
+  computed: {
+    cartQty() {
+      const Qty = this.$store.state.cart.carts.length;
+      return Qty;
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 .btn-cart {

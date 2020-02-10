@@ -1,11 +1,11 @@
 <template>
   <div class="container mt-2">
+    <loading :active.sync="isLoading"></loading>
     <div class="row">
       <div class="col-md-2">
         <leftList/>
       </div>
       <div class="col-md-10">
-        <loading :active.sync="isLoading"></loading>
         <div class="row">
           <div class="col-md-4 mb-4" v-for="item in products" :key="item.id">
             <div class="card border-0 card-shadow">
@@ -100,7 +100,7 @@
       </div>
     </div>
     <!-- 查看更多 ↑ -->
-    <div class="my-5 row justify-content-center" v-if="cart.carts && cart.carts.length > 0">
+    <div class="my-5 row justify-content-center"  v-if="cart.carts && cart.carts.length > 0">
       <div class="my-5 row justify-content-center">
         <table class="table">
           <thead>
@@ -243,9 +243,7 @@ export default {
   },
   data() {
     return {
-      // products: [],
       product: {},
-      cart: {},
       status: {
         loadingItem: '',
       },
@@ -268,17 +266,13 @@ export default {
     products() {
       return this.$store.state.products;
     },
+    cart() {
+      return this.$store.state.cart;
+    },
   },
   methods: {
     getProducts() {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=:page`;
-      vm.$store.dispatch('updateLoading', true);
-      this.$http.get(url).then((response) => {
-        vm.products = response.data.products;
-        console.log(response);
-        vm.$store.dispatch('updateLoading', false);
-      });
+      this.$store.dispatch('getProducts');
     },
     getProduct(id) {
       const vm = this;
@@ -292,38 +286,14 @@ export default {
       });
     },
     addtoCart(id, qty = 1) {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.status.loadingItem = id;
-      const cart = {
-        product_id: id,
-        qty,
-      };
-      this.$http.post(url, { data: cart }).then((response) => {
-        console.log(response);
-        vm.status.loadingItem = '';
-        vm.getCart();
-        $('#productModal').modal('hide');
-      });
+      this.$store.dispatch('addtoCart', { id, qty });
+      $('#productModal').modal('hide');
     },
     getCart() {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.$store.dispatch('updateLoading', true);
-      this.$http.get(url).then((response) => {
-        vm.cart = response.data.data;
-        console.log(response);
-        vm.$store.dispatch('updateLoading', false);
-      });
+      this.$store.dispatch('getCart');
     },
     removeCartItem(id) {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-      vm.$store.dispatch('updateLoading', true);
-      this.$http.delete(url).then(() => {
-        vm.getCart();
-        vm.$store.dispatch('updateLoading', false);
-      });
+      this.$store.dispatch('removeCartItem', id);
     },
     addCouponCode() {
       const vm = this;

@@ -17,5 +17,8 @@ export default {
     navbar,
     myFooter,
   },
+  created() {
+    this.$store.dispatch('getCart');
+  },
 };
 </script>
